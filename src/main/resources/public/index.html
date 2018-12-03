@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>NetFlux</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="netflux.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="netflux.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="app.css">
+</head>
+
+<body>
+
+    <header class="cabecera">
+        <h1 class="titulo"><img class="logotipo" src="netflux.jpg"> <strong>NetFlux Catalog</strong></h1>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav mx-auto">
+                    <a class="nav-item nav-link" href="#">INICIO</a>
+                    <a class="nav-item nav-link" href="#">PELICULAS</a>
+                    <a class="nav-item nav-link" href="#">TELEVISION</a>
+                    <a class="nav-item nav-link" href="#">DOCUMENTALES</a>
+                    <a class="nav-item nav-link" href="#">RECOMENDACIONES</a>
+                    <a class="nav-item nav-link" href="#">TRAILERS</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main class="container-fluid">
+
+        <section class="jumbotron">
+            <h2>Novedades del catálogo de NetFlux</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et felis nunc. Morbi
+                    dapibus, augue eu feugiat luctus, ipsum sapien pretium ante, in bibendum orci sem vitae eros.
+                    Quisque commodo fringilla placerat. Integer sit amet auctor nibh. Vivamus dapibus tristique sem, at
+                    gravida ligula. Etiam facilisis tempus urna, sit amet molestie felis feugiat nec. Fusce porta porta
+                    quam, ut consequat augue malesuada nec. In efficitur mi eu lectus rutrum, ut interdum nunc
+                    consequat. Nullam eu volutpat lorem. Nullam ipsum felis, condimentum at elit vel, gravida finibus
+                    nulla. Proin ut est nisi. Cras ut ipsum in mi aliquet lacinia tempus ac.
+                </p>
+                <a class="btn btn-primary btn-lg" href="#" role="button">Saber más</a>
+        </section>
+
+        <section class="row">
+            <section class="col-sm-12 col-lg-9">
+
+                <h4>Nuevas películas</h4>
+
+                <section id="newMovies" class="row"></section>
+
+                <hr>
+
+                <h4>Nuevas series</h4>
+
+                <section id="newSeries" class="row"></section>
+
+            </section>
+
+            <aside class="col-sm-12 col-lg-3">
+
+                <section class="border asidePadding">
+                    <h4>DESTACADOS</h4>
+
+                    <section id="highlights"></section>
+                </section>
+
+                <section class="border asidePadding">
+                    <h4>TRAILERS</h4>
+
+                    <section id="trailers"></section>
+                </section>
+
+            </aside>
+
+        </section>
+    </main>
+
+    <hr>
+
+    <footer class="footer-style">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-6 footer-col centrar">
+                    <h4>Dirección</h4>
+
+                    <a src="./movie.html?id=sa&type=pel"></a>
+
+                    <p>
+                        Alicante - España <br />
+                        Calle del molí, 11
+                    </p>
+                </div>
+                <div class="col-md-6 col-lg-6 footer-col centrar">
+                    <h4>Contacto</h4>
+                    <p>Telefono: 677257252</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+<script>
+    $(document).ready(function () {
+        
+        var baseURL = "https://dsai-netflux.herokuapp.com"
+
+        $.get("https://dsai-netflux.herokuapp.com/api/peliculas/novedades", function (data) {
+
+            data.forEach(element => {
+                let div = '<div class="col-sm-12 col-md-6 col-lg-3">'
+
+                div += '<a class="linkImagen" href="./movie.html?id=' + element.id + '&type=peliculas">'
+
+                div += '<img class="novedades img-thumbnail mx-auto d-block" src="' + baseURL + element.imgURL +
+                    '">'
+
+                div += '<p class="centrar">' + element.title + '</p>'
+
+                div += '</a>'
+
+                div += '</div>';
+
+                $("#newMovies").append(div)
+            });
+        })
+
+        $.get("https://dsai-netflux.herokuapp.com/api/series/novedades", function (data) {
+
+            data.forEach(element => {
+                let div = '<div class="col-sm-12 col-md-6 col-lg-3">'
+
+                div += '<a class="linkImagen" href="./movie.html?id=' + element.id + '&type=series">'
+
+                div += '<img class="novedades img-thumbnail mx-auto d-block" src="' + baseURL + element.imgURL +
+                    '">'
+
+                div += '<p class="centrar">' + element.title + '</p>'
+
+                div += '</a>'
+
+                div += '</div>';
+
+                $("#newSeries").append(div)
+            });
+        })
+
+        $.get("https://dsai-netflux.herokuapp.com/api/destacados", function (data) {
+
+            data.forEach(element => {
+                let div = '<div>'
+                let v
+
+                div += '<a class="linkImagen" href="./movie.html?id=' + element.id + '&type=' + element.type + '">'
+
+                div += '<img class="img-fluid rounded mx-auto d-block imgAside" src="' +
+                    baseURL + element.imgURL +
+                    '">'
+
+                div += '<p class="centrar">' + element.title + '</p>'
+
+                div += '</a>'
+
+                div += '</div>';
+
+                $("#highlights").append(div)
+            });
+        })
+
+        $.get("https://dsai-netflux.herokuapp.com/api/trailers", function (data) {
+
+            data.forEach(element => {
+                let div = '<div>'
+
+                 div += '<a class="linkImagen" href="'+ element.url +'" target="_blank">'
+
+                div += '<img class="img-fluid rounded mx-auto d-block imgAside" src="' +
+                    baseURL + element.imgURL +
+                    '">'
+
+                div += '<p class="centrar">' + element.title + '</p>'
+
+                div += '</a>'
+
+                div += '</div>';
+
+                $("#trailers").append(div)
+            });
+        })
+    })
+</script>
+
+</html>
