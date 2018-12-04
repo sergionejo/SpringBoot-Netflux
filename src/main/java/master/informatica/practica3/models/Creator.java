@@ -3,11 +3,13 @@ package master.informatica.practica3.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 /**
  * Creator
@@ -23,6 +25,13 @@ public class Creator {
 
     @ManyToMany(mappedBy = "creators")
     private List<Serie> series = new ArrayList<>();
+
+    @OneToMany(
+        mappedBy = "director", 
+        cascade = CascadeType.ALL, 
+        orphanRemoval = true
+    )
+    private List<Movie> movies = new ArrayList<>();
 
     /**
      * @return the name
@@ -64,5 +73,19 @@ public class Creator {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /**
+     * @return the movies
+     */
+    public List<Movie> getMovies() {
+        return movies;
+    }
+
+    /**
+     * @param movies the movies to set
+     */
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
     }
 }

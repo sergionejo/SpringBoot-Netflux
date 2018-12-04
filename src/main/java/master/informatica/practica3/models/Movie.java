@@ -5,12 +5,14 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 /**
  * Movie
@@ -32,15 +34,17 @@ public class Movie {
 
     private int duration;
 
-    private String director;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "director")
+    private Creator director;
 
     @ManyToMany(cascade = { 
         CascadeType.PERSIST, 
         CascadeType.MERGE
     })
     @JoinTable(name = "cast_movie",
-        joinColumns = @JoinColumn(name = "cast"),
-        inverseJoinColumns = @JoinColumn(name = "movie")
+        joinColumns = @JoinColumn(name = "movie"),
+        inverseJoinColumns = @JoinColumn(name = "cast")
     )
     private List<Cast> cast = new ArrayList<>();
 
@@ -55,14 +59,14 @@ public class Movie {
     /**
      * @return the director
      */
-    public String getDirector() {
+    public Creator getDirector() {
         return director;
     }
 
     /**
      * @param director the director to set
      */
-    public void setDirector(String director) {
+    public void setDirector(Creator director) {
         this.director = director;
     }
 

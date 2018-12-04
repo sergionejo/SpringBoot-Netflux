@@ -37,12 +37,12 @@ public class Serie {
     private int seasons;
 
     @ManyToMany(cascade = { 
-        CascadeType.PERSIST, 
+        CascadeType.ALL, 
         CascadeType.MERGE
     })
     @JoinTable(name = "creator_serie",
-        joinColumns = @JoinColumn(name = "creator"),
-        inverseJoinColumns = @JoinColumn(name = "serie")
+        joinColumns = @JoinColumn(name = "serie"),
+        inverseJoinColumns = @JoinColumn(name = "creator")
     )
     private List<Creator> creators = new ArrayList<>();
 
@@ -51,8 +51,8 @@ public class Serie {
         CascadeType.MERGE
     })
     @JoinTable(name = "cast_serie",
-        joinColumns = @JoinColumn(name = "cast"),
-        inverseJoinColumns = @JoinColumn(name = "serie")
+        joinColumns = @JoinColumn(name = "serie"),
+        inverseJoinColumns = @JoinColumn(name = "cast")
     )
     private List<Cast> cast = new ArrayList<>();
 
