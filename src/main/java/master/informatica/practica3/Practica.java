@@ -1,8 +1,7 @@
 package master.informatica.practica3;
 
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,6 +16,7 @@ import master.informatica.practica3.models.Serie;
 import master.informatica.practica3.models.Trailer;
 import master.informatica.practica3.repositories.CastRepository;
 import master.informatica.practica3.repositories.CreatorRepository;
+import master.informatica.practica3.repositories.HighlightRepository;
 import master.informatica.practica3.repositories.MovieRepository;
 import master.informatica.practica3.repositories.SerieRepository;
 import master.informatica.practica3.repositories.TrailerRepository;
@@ -30,12 +30,16 @@ public class Practica {
 
 	@Bean
 	public CommandLineRunner init(CreatorRepository creatorRepository, CastRepository castRepository,
-			TrailerRepository trailerRepository, MovieRepository movieRepository, SerieRepository serieRepository) {
+			TrailerRepository trailerRepository, MovieRepository movieRepository, SerieRepository serieRepository, HighlightRepository highlightRepository) {
 		return (args) -> {
 
 			Creator c = new Creator();
 			c.setName("Sergio");
 			creatorRepository.save(c);
+
+			Creator cr = new Creator();
+			cr.setName("Diego Armando Maradona");
+			creatorRepository.save(cr);
 
 			for (int i = 0; i < 10; i++) {
 				Cast cast = new Cast();
@@ -45,7 +49,7 @@ public class Practica {
 
 			for (int i = 0; i < 10; i++) {
 				Movie m = new Movie();
-				m.setTitle("Pelicula" + (i + 1));
+				m.setTitle("Pelicula " + (i + 1));
 				m.setDescription("Descripcion de la pelicula");
 				m.setYear(1990 + i);
 				m.setDuration(100 + (i * 10));
@@ -67,7 +71,7 @@ public class Practica {
 
 			for (int i = 0; i < 10; i++) {
 				Serie s = new Serie();
-				s.setTitle("Serie" + (i + 1));
+				s.setTitle("Serie " + (i + 1));
 				s.setDescription("Descripcion de la serie");
 				s.setYearStart(1990 + i);
 				s.setYearEnd(1995 + i);
@@ -85,16 +89,24 @@ public class Practica {
 				s.getCast().addAll(addCast);
 
 				s.getCreators().add(c);
+				s.getCreators().add(cr);
 				serieRepository.save(s);
 			}
 
 			Trailer trailer = new Trailer();
 			trailer.setTitle("Trailer");
 			trailer.setUrl("https://www.youtube.com/watch?v=vCzgGgIgofk");
+			trailerRepository.save(trailer);
 
 			Highlight highlight = new Highlight();
 			highlight.setType("series");
-			highlight.setTitle("España");
+			highlight.setDestacadosSeries(serieRepository.findById(3L).get());
+			highlightRepository.save(highlight);
+
+			Highlight highlight2 = new Highlight();
+			highlight2.setType("peliculas");
+			highlight2.setDestacadosMovies(movieRepository.findById(7L).get());
+			highlightRepository.save(highlight2);
 		};
 	}
 }

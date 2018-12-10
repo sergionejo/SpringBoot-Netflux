@@ -13,6 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Movie
@@ -34,7 +37,7 @@ public class Movie {
 
     private int duration;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "director")
     private Creator director;
 
@@ -48,6 +51,13 @@ public class Movie {
     )
     private List<Cast> cast = new ArrayList<>();
 
+    @OneToMany(
+        mappedBy = "destacadosMovies", 
+        cascade = CascadeType.ALL, 
+        orphanRemoval = true
+    )
+    @JsonIgnore
+    private List<Highlight> destacados = new ArrayList<>();
 
     /**
      * @return the url

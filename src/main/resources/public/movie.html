@@ -139,13 +139,11 @@
 
         if (urlParams.get('id')) {
             if (urlParams.get('type') && urlParams.get('type') == 'peliculas') {
-                $.get(baseURL + '/api/peliculas/' + urlParams.get('id'), function (data) {
+                $.get("http://localhost:8080" + '/peliculas/' + urlParams.get('id'), function (data) {
 
 
                     let img =
-                        '<img class="portada img-thumbnail mx-auto d-block mx-auto d-block" src="' +
-                        baseURL + data.imgURL +
-                        '">'
+                        '<img class="portada img-thumbnail mx-auto d-block mx-auto d-block" src="https://fakeimg.pl/350x250/?text='+ data.title +'">'
 
                     $('#photo').append(img)
 
@@ -164,7 +162,7 @@
 
                     $('#titleDetails').append('Reparto de ' + data.title)
 
-                    let creator = '<ul><li>' + data.director + '</li></ul>'
+                    let creator = '<ul><li>' + data.director.name + '</li></ul>'
 
                     $('#directedBy').append('<b>Dirigida por:</b>')
 
@@ -173,9 +171,7 @@
                     data.cast.forEach(element => {
                         let div = '<div class="col-sm-12 col-md-6 col-lg-4">'
 
-                        div += '<img class="img-fluid" src="' + baseURL +
-                            element.imgURL +
-                            '">'
+                        div += '<img class="img-fluid" src="https://fakeimg.pl/100x100/?text='+ element.name +'">'
 
                         div += element.name
 
@@ -188,12 +184,10 @@
                 })
             } else {
                 if (urlParams.get('type') && urlParams.get('type') == 'series') {
-                    $.get(baseURL + '/api/series/' + urlParams.get('id'), function (data) {
+                    $.get("http://localhost:8080" + '/series/' + urlParams.get('id'), function (data) {
 
                         let img =
-                            '<img class="portada img-thumbnail mx-auto d-block mx-auto d-block" src="' +
-                            baseURL + data.imgURL +
-                            '">'
+                            '<img class="portada img-thumbnail mx-auto d-block mx-auto d-block" src="https://fakeimg.pl/350x250/?text='+ data.title +'">'
 
                         $('#photo').append(img)
 
@@ -220,8 +214,10 @@
 
                         let creators = '<ul>'
 
+                        console.table(data.creators)
+
                         data.creators.forEach(element => {
-                            creators += '<li>' + element + '</li>'
+                            creators += '<li>' + element.name + '</li>'
                         });
 
                         creators += '</ul>'
@@ -233,9 +229,7 @@
                         data.cast.forEach(element => {
                             let div = '<div class="col-sm-12 col-md-6 col-lg-4">'
 
-                            div += '<img class="img-fluid" src="' + baseURL +
-                                element.imgURL +
-                                '">'
+                            div += '<img class="img-fluid" src="https://fakeimg.pl/100x100/?text='+ element.name +'">'
 
                             div += element.name 
 
@@ -255,19 +249,30 @@
 
 
 
-        $.get("https://dsai-netflux.herokuapp.com/api/destacados", function (data) {
+        $.get("http://localhost:8080/destacados", function (data) {
 
             data.forEach(element => {
                 let div = '<div>'
 
-                div += '<a class="linkImagen" href="./movie.html?id=' + element.id + '&type=' +
-                    element.type + '">'
+                if (element.type == 'peliculas') {
+                    div += '<a class="linkImagen" href="./movie.html?id=' + element.destacadosMovies.id +
+                        '&type=' + element.type + '">'
 
-                div += '<img class="img-fluid rounded mx-auto d-block imgAside" src="' +
-                    baseURL + element.imgURL +
-                    '">'
+                    div +=
+                        '<img class="img-fluid rounded mx-auto d-block imgAside" src="https://fakeimg.pl/250x250/?text=' +
+                        element.destacadosMovies.title + '">'
 
-                div += '<p class="centrar">' + element.title + '</p>'
+                    div += '<p class="centrar">' + element.destacadosMovies.title + '</p>'
+                } else if (element.type == 'series') {
+                    div += '<a class="linkImagen" href="./movie.html?id=' + element.destacadosSeries.id +
+                        '&type=' + element.type + '">'
+
+                    div +=
+                        '<img class="img-fluid rounded mx-auto d-block imgAside" src="https://fakeimg.pl/250x250/?text=' +
+                        element.destacadosSeries.title + '">'
+
+                    div += '<p class="centrar">' + element.destacadosSeries.title + '</p>'
+                }
 
                 div += '</a>'
 
@@ -277,16 +282,14 @@
             });
         })
 
-        $.get("https://dsai-netflux.herokuapp.com/api/trailers", function (data) {
+        $.get("http://localhost:8080/trailers", function (data) {
 
             data.forEach(element => {
                 let div = '<div>'
 
                 div += '<a class="linkImagen" href="'+ element.url +'" target="_blank">'
 
-                div += '<img class="img-fluid rounded mx-auto d-block imgAside" src="' +
-                    baseURL + element.imgURL +
-                    '">'
+                div += '<img class="img-fluid rounded mx-auto d-block imgAside" src="https://fakeimg.pl/250x250/?text='+ element.title +'">'
 
                 div += '<p class="centrar">' + element.title + '</p>'
 

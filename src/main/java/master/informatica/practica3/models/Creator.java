@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Creator
  */
@@ -24,6 +26,7 @@ public class Creator {
     private String name;
 
     @ManyToMany(mappedBy = "creators")
+    @JsonIgnore
     private List<Serie> series = new ArrayList<>();
 
     @OneToMany(
@@ -31,6 +34,7 @@ public class Creator {
         cascade = CascadeType.ALL, 
         orphanRemoval = true
     )
+    @JsonIgnore
     private List<Movie> movies = new ArrayList<>();
 
     /**

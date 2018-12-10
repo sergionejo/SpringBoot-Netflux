@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Serie
@@ -55,6 +58,14 @@ public class Serie {
         inverseJoinColumns = @JoinColumn(name = "cast")
     )
     private List<Cast> cast = new ArrayList<>();
+
+    @OneToMany(
+        mappedBy = "destacadosSeries", 
+        cascade = CascadeType.ALL, 
+        orphanRemoval = true
+    )
+    @JsonIgnore
+    private List<Highlight> destacados = new ArrayList<>();
 
     /**
      * @return the url

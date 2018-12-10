@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Cast
  */
@@ -24,9 +26,11 @@ public class Cast {
     private String imgURL;
 
     @ManyToMany(mappedBy = "cast")
+    @JsonIgnore
     private List<Movie> movies = new ArrayList<>();
 
     @ManyToMany(mappedBy = "cast")
+    @JsonIgnore
     private List<Serie> series = new ArrayList<>();
 
     /**

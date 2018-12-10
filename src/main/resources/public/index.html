@@ -121,18 +121,20 @@
 
 <script>
     $(document).ready(function () {
-        
+
         var baseURL = "https://dsai-netflux.herokuapp.com"
 
-        $.get("https://dsai-netflux.herokuapp.com/api/peliculas/novedades", function (data) {
+        $.get("http://localhost:8080/peliculas/novedades", function (data) {
 
             data.forEach(element => {
                 let div = '<div class="col-sm-12 col-md-6 col-lg-3">'
 
-                div += '<a class="linkImagen" href="./movie.html?id=' + element.id + '&type=peliculas">'
+                div += '<a class="linkImagen" href="./movie.html?id=' + element.id +
+                    '&type=peliculas">'
 
-                div += '<img class="novedades img-thumbnail mx-auto d-block" src="' + baseURL + element.imgURL +
-                    '">'
+                div +=
+                    '<img class="novedades img-thumbnail mx-auto d-block" src="https://fakeimg.pl/350x250/?text=' +
+                    element.title + '">'
 
                 div += '<p class="centrar">' + element.title + '</p>'
 
@@ -144,15 +146,17 @@
             });
         })
 
-        $.get("https://dsai-netflux.herokuapp.com/api/series/novedades", function (data) {
+        $.get("http://localhost:8080/series/novedades", function (data) {
 
             data.forEach(element => {
                 let div = '<div class="col-sm-12 col-md-6 col-lg-3">'
 
-                div += '<a class="linkImagen" href="./movie.html?id=' + element.id + '&type=series">'
+                div += '<a class="linkImagen" href="./movie.html?id=' + element.id +
+                    '&type=series">'
 
-                div += '<img class="novedades img-thumbnail mx-auto d-block" src="' + baseURL + element.imgURL +
-                    '">'
+                div +=
+                    '<img class="novedades img-thumbnail mx-auto d-block" src="https://fakeimg.pl/350x250/?text=' +
+                    element.title + '">'
 
                 div += '<p class="centrar">' + element.title + '</p>'
 
@@ -164,19 +168,35 @@
             });
         })
 
-        $.get("https://dsai-netflux.herokuapp.com/api/destacados", function (data) {
+        $.get("http://localhost:8080/destacados", function (data) {
 
             data.forEach(element => {
+
+                console.table(element)
+
                 let div = '<div>'
                 let v
 
-                div += '<a class="linkImagen" href="./movie.html?id=' + element.id + '&type=' + element.type + '">'
+                if (element.type == 'peliculas') {
+                    div += '<a class="linkImagen" href="./movie.html?id=' + element.destacadosMovies.id +
+                        '&type=' + element.type + '">'
 
-                div += '<img class="img-fluid rounded mx-auto d-block imgAside" src="' +
-                    baseURL + element.imgURL +
-                    '">'
+                    div +=
+                        '<img class="img-fluid rounded mx-auto d-block imgAside" src="https://fakeimg.pl/250x250/?text=' +
+                        element.destacadosMovies.title + '">'
 
-                div += '<p class="centrar">' + element.title + '</p>'
+                    div += '<p class="centrar">' + element.destacadosMovies.title + '</p>'
+                } else if (element.type == 'series') {
+                    div += '<a class="linkImagen" href="./movie.html?id=' + element.destacadosSeries.id +
+                        '&type=' + element.type + '">'
+
+                    div +=
+                        '<img class="img-fluid rounded mx-auto d-block imgAside" src="https://fakeimg.pl/250x250/?text=' +
+                        element.destacadosSeries.title + '">'
+
+                    div += '<p class="centrar">' + element.destacadosSeries.title + '</p>'
+                }
+
 
                 div += '</a>'
 
@@ -186,16 +206,18 @@
             });
         })
 
-        $.get("https://dsai-netflux.herokuapp.com/api/trailers", function (data) {
+        $.get("http://localhost:8080/trailers", function (data) {
+
+            console.table(data)
 
             data.forEach(element => {
                 let div = '<div>'
 
-                 div += '<a class="linkImagen" href="'+ element.url +'" target="_blank">'
+                div += '<a class="linkImagen" href="' + element.url + '" target="_blank">'
 
-                div += '<img class="img-fluid rounded mx-auto d-block imgAside" src="' +
-                    baseURL + element.imgURL +
-                    '">'
+                div +=
+                    '<img class="img-fluid rounded mx-auto d-block imgAside" src="https://fakeimg.pl/250x250/?text=' +
+                    element.title + '">'
 
                 div += '<p class="centrar">' + element.title + '</p>'
 
