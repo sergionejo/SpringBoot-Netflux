@@ -68,6 +68,20 @@ public class Serie {
     private List<Highlight> destacados = new ArrayList<>();
 
     /**
+     * @return the destacados
+     */
+    public List<Highlight> getDestacados() {
+        return destacados;
+    }
+
+    /**
+     * @param destacados the destacados to set
+     */
+    public void setDestacados(List<Highlight> destacados) {
+        this.destacados = destacados;
+    }
+
+    /**
      * @return the url
      */
     public String getUrl() {

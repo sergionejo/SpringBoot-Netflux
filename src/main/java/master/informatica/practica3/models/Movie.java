@@ -29,6 +29,8 @@ public class Movie {
 
     private String url;
 
+    private String imgURL;
+
     private String title;
 
     private String description;
@@ -59,6 +61,34 @@ public class Movie {
     @JsonIgnore
     private List<Highlight> destacados = new ArrayList<>();
 
+    /**
+     * @return the imgURL
+     */
+    public String getImgURL() {
+        return imgURL;
+    }
+
+    /**
+     * @param imgURL the imgURL to set
+     */
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
+    }
+
+    /**
+     * @return the destacados
+     */
+    public List<Highlight> getDestacados() {
+        return destacados;
+    }
+
+    /**
+     * @param destacados the destacados to set
+     */
+    public void setDestacados(List<Highlight> destacados) {
+        this.destacados = destacados;
+    }
+    
     /**
      * @return the url
      */

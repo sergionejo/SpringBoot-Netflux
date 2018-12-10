@@ -133,8 +133,8 @@
                     '&type=peliculas">'
 
                 div +=
-                    '<img class="novedades img-thumbnail mx-auto d-block" src="https://fakeimg.pl/350x250/?text=' +
-                    element.title + '">'
+                    '<img class="novedades img-thumbnail mx-auto d-block" src="' +
+                    element.imgURL + '">'
 
                 div += '<p class="centrar">' + element.title + '</p>'
 
@@ -155,8 +155,8 @@
                     '&type=series">'
 
                 div +=
-                    '<img class="novedades img-thumbnail mx-auto d-block" src="https://fakeimg.pl/350x250/?text=' +
-                    element.title + '">'
+                    '<img class="novedades img-thumbnail mx-auto d-block" src="' + element.imgURL +
+                    '">'
 
                 div += '<p class="centrar">' + element.title + '</p>'
 
@@ -172,27 +172,27 @@
 
             data.forEach(element => {
 
-                console.table(element)
-
                 let div = '<div>'
                 let v
 
                 if (element.type == 'peliculas') {
-                    div += '<a class="linkImagen" href="./movie.html?id=' + element.destacadosMovies.id +
+                    div += '<a class="linkImagen" href="./movie.html?id=' + element.destacadosMovies
+                        .id +
                         '&type=' + element.type + '">'
 
                     div +=
-                        '<img class="img-fluid rounded mx-auto d-block imgAside" src="https://fakeimg.pl/250x250/?text=' +
-                        element.destacadosMovies.title + '">'
+                        '<img class="img-fluid rounded mx-auto d-block imgAside" src="' +
+                        element.destacadosMovies.imgURL + '">'
 
                     div += '<p class="centrar">' + element.destacadosMovies.title + '</p>'
                 } else if (element.type == 'series') {
-                    div += '<a class="linkImagen" href="./movie.html?id=' + element.destacadosSeries.id +
+                    div += '<a class="linkImagen" href="./movie.html?id=' + element.destacadosSeries
+                        .id +
                         '&type=' + element.type + '">'
 
                     div +=
-                        '<img class="img-fluid rounded mx-auto d-block imgAside" src="https://fakeimg.pl/250x250/?text=' +
-                        element.destacadosSeries.title + '">'
+                        '<img class="img-fluid rounded mx-auto d-block imgAside" src="' +
+                        element.destacadosSeries.imgURL + '">'
 
                     div += '<p class="centrar">' + element.destacadosSeries.title + '</p>'
                 }
@@ -208,16 +208,14 @@
 
         $.get("http://localhost:8080/trailers", function (data) {
 
-            console.table(data)
-
             data.forEach(element => {
                 let div = '<div>'
 
                 div += '<a class="linkImagen" href="' + element.url + '" target="_blank">'
 
                 div +=
-                    '<img class="img-fluid rounded mx-auto d-block imgAside" src="https://fakeimg.pl/250x250/?text=' +
-                    element.title + '">'
+                    '<img class="img-fluid rounded mx-auto d-block imgAside" src="' +
+                    element.imgURL + '">'
 
                 div += '<p class="centrar">' + element.title + '</p>'
 

@@ -44,6 +44,7 @@ public class Practica {
 			for (int i = 0; i < 10; i++) {
 				Cast cast = new Cast();
 				cast.setName("Actor " + (i + 1));
+				cast.setImgURL("https://fakeimg.pl/100x100/?text=" + cast.getName());
 				castRepository.save(cast);
 			}
 
@@ -54,9 +55,11 @@ public class Practica {
 				m.setYear(1990 + i);
 				m.setDuration(100 + (i * 10));
 				m.setDirector(c);
-				m.setUrl("prueba");
 				m.setDirector(c);
+				m.setImgURL("https://fakeimg.pl/350x250/?text=" + m.getTitle());
 				movieRepository.save(m);
+
+				m.setUrl("https://localhost:8080/peliculas/" + m.getId());
 
 				Iterable<Cast> allCast = castRepository.findAll();
 				List<Cast> addCast = new ArrayList<>();
@@ -76,8 +79,10 @@ public class Practica {
 				s.setYearStart(1990 + i);
 				s.setYearEnd(1995 + i);
 				s.setSeasons((i * 2));
-				s.setUrl("prueba");
+				s.setImgURL("https://fakeimg.pl/350x250/?text=" + s.getTitle());
 				serieRepository.save(s);
+
+				s.setUrl("https://localhost:8080/series/" + s.getId());
 
 				Iterable<Cast> allCast = castRepository.findAll();
 				List<Cast> addCast = new ArrayList<>();
@@ -96,6 +101,7 @@ public class Practica {
 			Trailer trailer = new Trailer();
 			trailer.setTitle("Trailer");
 			trailer.setUrl("https://www.youtube.com/watch?v=vCzgGgIgofk");
+			trailer.setImgURL("https://fakeimg.pl/250x250/?text=" + trailer.getTitle());
 			trailerRepository.save(trailer);
 
 			Highlight highlight = new Highlight();

@@ -143,7 +143,7 @@
 
 
                     let img =
-                        '<img class="portada img-thumbnail mx-auto d-block mx-auto d-block" src="https://fakeimg.pl/350x250/?text='+ data.title +'">'
+                        '<img class="portada img-thumbnail mx-auto d-block mx-auto d-block" src="'+ data.imgURL +'">'
 
                     $('#photo').append(img)
 
@@ -171,7 +171,7 @@
                     data.cast.forEach(element => {
                         let div = '<div class="col-sm-12 col-md-6 col-lg-4">'
 
-                        div += '<img class="img-fluid" src="https://fakeimg.pl/100x100/?text='+ element.name +'">'
+                        div += '<img class="img-fluid" src="'+ element.imgURL +'">'
 
                         div += element.name
 
@@ -187,7 +187,7 @@
                     $.get("http://localhost:8080" + '/series/' + urlParams.get('id'), function (data) {
 
                         let img =
-                            '<img class="portada img-thumbnail mx-auto d-block mx-auto d-block" src="https://fakeimg.pl/350x250/?text='+ data.title +'">'
+                            '<img class="portada img-thumbnail mx-auto d-block mx-auto d-block" src="'+ data.imgURL +'">'
 
                         $('#photo').append(img)
 
@@ -214,8 +214,6 @@
 
                         let creators = '<ul>'
 
-                        console.table(data.creators)
-
                         data.creators.forEach(element => {
                             creators += '<li>' + element.name + '</li>'
                         });
@@ -229,7 +227,7 @@
                         data.cast.forEach(element => {
                             let div = '<div class="col-sm-12 col-md-6 col-lg-4">'
 
-                            div += '<img class="img-fluid" src="https://fakeimg.pl/100x100/?text='+ element.name +'">'
+                            div += '<img class="img-fluid" src="'+ element.imgURL +'">'
 
                             div += element.name 
 
@@ -259,8 +257,8 @@
                         '&type=' + element.type + '">'
 
                     div +=
-                        '<img class="img-fluid rounded mx-auto d-block imgAside" src="https://fakeimg.pl/250x250/?text=' +
-                        element.destacadosMovies.title + '">'
+                        '<img class="img-fluid rounded mx-auto d-block imgAside" src="' +
+                        element.destacadosMovies.imgURL + '">'
 
                     div += '<p class="centrar">' + element.destacadosMovies.title + '</p>'
                 } else if (element.type == 'series') {
@@ -268,8 +266,8 @@
                         '&type=' + element.type + '">'
 
                     div +=
-                        '<img class="img-fluid rounded mx-auto d-block imgAside" src="https://fakeimg.pl/250x250/?text=' +
-                        element.destacadosSeries.title + '">'
+                        '<img class="img-fluid rounded mx-auto d-block imgAside" src="' +
+                        element.destacadosSeries.imgURL + '">'
 
                     div += '<p class="centrar">' + element.destacadosSeries.title + '</p>'
                 }
@@ -289,7 +287,7 @@
 
                 div += '<a class="linkImagen" href="'+ element.url +'" target="_blank">'
 
-                div += '<img class="img-fluid rounded mx-auto d-block imgAside" src="https://fakeimg.pl/250x250/?text='+ element.title +'">'
+                div += '<img class="img-fluid rounded mx-auto d-block imgAside" src="'+ element.imgURL +'">'
 
                 div += '<p class="centrar">' + element.title + '</p>'
 
