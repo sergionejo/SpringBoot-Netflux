@@ -134,12 +134,11 @@
 <script>
     $(document).ready(function () {
 
-        var baseURL = "https://dsai-netflux.herokuapp.com"
         var urlParams = new URLSearchParams(window.location.search);
 
         if (urlParams.get('id')) {
             if (urlParams.get('type') && urlParams.get('type') == 'peliculas') {
-                $.get("http://localhost:8080" + '/peliculas/' + urlParams.get('id'), function (data) {
+                $.get('/peliculas/' + urlParams.get('id'), function (data) {
 
 
                     let img =
@@ -184,7 +183,7 @@
                 })
             } else {
                 if (urlParams.get('type') && urlParams.get('type') == 'series') {
-                    $.get("http://localhost:8080" + '/series/' + urlParams.get('id'), function (data) {
+                    $.get('/series/' + urlParams.get('id'), function (data) {
 
                         let img =
                             '<img class="portada img-thumbnail mx-auto d-block mx-auto d-block" src="'+ data.imgURL +'">'
@@ -247,7 +246,7 @@
 
 
 
-        $.get("http://localhost:8080/destacados", function (data) {
+        $.get("/destacados", function (data) {
 
             data.forEach(element => {
                 let div = '<div>'
@@ -280,7 +279,7 @@
             });
         })
 
-        $.get("http://localhost:8080/trailers", function (data) {
+        $.get("/trailers", function (data) {
 
             data.forEach(element => {
                 let div = '<div>'
